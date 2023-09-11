@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="noindex">
+  <title>A-portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Grape+Nuts&display=swap" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="assets/js/jquery.ripples.js"></script>
+  <script src="assets/js/bubble-background.js"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      $('#container').ripples({
+        resolution: 700, //波紋の広がりの速度（値が大きいほど遅くなる。）
+        dropRadius: 10, //波紋の大きさ（値が大きいほど大きくなる。）
+        perturbance: 0.1 //波紋による屈折量（値が大きいほどブレる。）
+      });
+    });
+
+    var window_h = $(window).height();
+    $("#wh span").text(window_h);
+    //スクロールイベント
+    $(window).on("scroll", function () {
+      var scroll_top = $(window).scrollTop();
+      $("#scroll span").text(scroll_top);
+
+      $(".box-wrapper").each(function () {
+        var elem_pos = $(this).offset().top;
+
+        //どのタイミングでフェードインさせるか
+        if (scroll_top >= elem_pos - window_h + 200) {
+          $(this).addClass("fadein");
+        } else {
+          $(this).removeClass("fadein");
+        }
+      });
+    });
+
+    var window_h = $(window).height();
+    $("#wh span").text(window_h);
+    //スクロールイベント
+    $(window).on("scroll", function () {
+      var scroll_top = $(window).scrollTop();
+      $("#scroll span").text(scroll_top);
+
+      $(".box2-wrapper").each(function () {
+        var elem_pos = $(this).offset().top;
+
+        //どのタイミングでフェードインさせるか
+        if (scroll_top >= elem_pos - window_h + 200) {
+          $(this).addClass("fadein");
+        } else {
+          $(this).removeClass("fadein");
+        }
+      });
+    });
+
+    var window_h = $(window).height();
+    $("#wh span").text(window_h);
+    //スクロールイベント
+    $(window).on("scroll", function () {
+      var scroll_top = $(window).scrollTop();
+      $("#scroll span").text(scroll_top);
+
+      $(".box3-wrapper").each(function () {
+        var elem_pos = $(this).offset().top;
+
+        //どのタイミングでフェードインさせるか
+        if (scroll_top >= elem_pos - window_h + 200) {
+          $(this).addClass("fadein");
+        } else {
+          $(this).removeClass("fadein");
+        }
+      });
+    });
+
+    var window_h = $(window).height();
+    $("#wh span").text(window_h);
+    //スクロールイベント
+    $(window).on("scroll", function () {
+      var scroll_top = $(window).scrollTop();
+      $("#scroll span").text(scroll_top);
+
+      $(".box4-wrapper").each(function () {
+        var elem_pos = $(this).offset().top;
+
+        //どのタイミングでフェードインさせるか
+        if (scroll_top >= elem_pos - window_h + 200) {
+          $(this).addClass("fadein");
+        } else {
+          $(this).removeClass("fadein");
+        }
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+  <header id="header">
+    <h1>A-portfolio</h1>
+    <a href="https://github.com/whale31/whale31-portfolio" class="github-corner" aria-label="View source on Github">
+      <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor" class="octo-body"></path>
+      </svg>
+    </a>
+    <div class="scrolldown1"><span>Scroll</span></div>
+  </header>
+
+  <div id="container">
+    <div class="stars s">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+    <div class="stars m">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+    <div class="stars l">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <section class="about-wrapper">
+      <div class="box-wrapper">
+        <h2>気になったらチャレンジする</h2>
+        <div class="border">
+          <p>
+            気になったものはまずチャレンジする。<br>
+            様々な視野から考え、面白さや魅力を表現するをモットーに作品を制作しています。<br>
+            シナリオ、小説などの文芸作品<br>
+            イラスト・インフォグラフィックなど2D・3D作品<br>
+            ゲーム・アプリ・WEBサイトなどインタラクション作品<br>
+            様々な分野にチャレンジしています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-wrapper">
+      <div class="box2-wrapper">
+        <h2>デザインも実装もできる人間を目指して</h2>
+        <div class="border">
+          <p>
+            グラフィックやUIを設計し実際に動くようにするところまで自分でできる人間になりたいと思っています。<br>
+            デザインと実装は分業するのが主流ですがなんとか両立できる生き方を探していきたいです。<br>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-wrapper">
+      <div class="box-wrapper">
+        <h2>気持ち良いインタラクションが好き</h2>
+        <div class="border">
+          <p>
+            インタラクティブなものや動くグラフィックが好きです。<br>
+            こちらの動作に対してプロダクトが反応を返す。<br>
+            そんな「モノとの対話」ができるのがデジタルの良さだと思っています。<br>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-wrapper">
+      <h2>Works</h2>
+    </section>
+
+
+    <div class="box3-wrapper">
+      <div class="works">
+        <h3>シナリオ・小説など文芸作品</h3>
+        <div class="border">
+          <p>
+            シナリオ、小説や即興の台本など<br>
+            言語によって表現される作品です。
+          </p>
+        </div>
+
+        <div class="btn btn1">
+          <a href="./works/literature/index.html">Works</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="box4-wrapper">
+      <div class="works">
+        <h3>イラスト・インフォグラフィックなど2D・3D作品</h3>
+        <div class="border">
+          <p>
+            イラスト、WEBサイトデザイン<br>
+            インフォグラフィックなど<br>
+            2D・3D作品です。
+          </p>
+        </div>
+
+        <div class="btn btn1">
+          <a href="https://www.vivivit.com/portfolio/public/r2aymvuMfA">vivivit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="box3-wrapper">
+      <div class="works">
+        <h3>ゲーム・アプリ・WEBサイトなどインタラクション作品</h3>
+        <div class="border">
+          <p>
+            ゲーム、アプリケーションWEBサイトなど<br>
+            何かアクション(操作や行動)をした時<br>
+            そのアクションが一方通行にならず<br>
+            相手側のシステムなり機器が反応するなど<br>
+            動作のある作品です。
+          </p>
+        </div>
+
+        <div class="btn btn1">
+          <a href="./works/interaction/index.html">Works</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="about-wrapper">
+      <div class="box2-wrapper">
+        <h2>Profile</h2>
+        <div class="border">
+          <p>
+            Ayano / whale31<br>
+            デジタルハリウッド東京本校 [本科]UI/UXD専攻 2021年 4月生 卒業。<br>
+          </p>
+
+          <div class="sns-wrapper">
+            <a href="https://twitter.com/11memorandum11" class="sns">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512">
+                <title>twitter</title>
+                <path
+                  d="M496,109.5a201.8,201.8,0,0,1-56.55,15.3,97.51,97.51,0,0,0,43.33-53.6,197.74,197.74,0,0,1-62.56,23.5A99.14,99.14,0,0,0,348.31,64c-54.42,0-98.46,43.4-98.46,96.9a93.21,93.21,0,0,0,2.54,22.1,280.7,280.7,0,0,1-203-101.3A95.69,95.69,0,0,0,36,130.4C36,164,53.53,193.7,80,211.1A97.5,97.5,0,0,1,35.22,199v1.2c0,47,34,86.1,79,95a100.76,100.76,0,0,1-25.94,3.4,94.38,94.38,0,0,1-18.51-1.8c12.51,38.5,48.92,66.5,92.05,67.3A199.59,199.59,0,0,1,39.5,405.6,203,203,0,0,1,16,404.2,278.68,278.68,0,0,0,166.74,448c181.36,0,280.44-147.7,280.44-275.8,0-4.2-.11-8.4-.31-12.5A198.48,198.48,0,0,0,496,109.5Z" />
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="copyright">Copyright © 2022 Portfolio of whale31 All Rights Reserved.</div>
+  </footer>
+</body>
+
+</html>

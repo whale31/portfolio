@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta name="robots" content="noindex">
+  <title>A-portfolio-Works-literature</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Grape+Nuts&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header>
+    <a href="../../index.html">
+      <h1>A-portfolio</h1>
+    </a>
+  </header>
+
+  <main>
+    <div class="stars s">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+    <div class="stars m">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+    <div class="stars l">
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+
+    <section class="main-wrapper" id="web-works">
+      <div class="main-top">
+        <h2>ゲーム・アプリ・WEBサイトなどインタラクション作品</h2>
+        <p>
+          ゲーム、アプリケーションWEBサイトなど<br>
+          何かアクション(操作や行動)をした時、そのアクションが一方通行にならず<br>
+          相手側のシステムなり機器が反応するなど、動作のある作品です。
+        </p>
+      </div>
+
+      <div class="main">
+      </div>
+
+      </div>
+    </section>
+
+
+  </main>
+  </div>
+
+  <footer>
+    Copyright © 2022 Portfolio of whale31 All Rights Reserved.
+  </footer>
+
+  <script>
+    const list = {
+      WEB: [
+      ],
+      P5js: [
+      {
+          title: 'breakout',
+          link: 'https://editor.p5js.org/whale31/full/GuJV-cQQT'
+        },
+      ],
+    };
+
+    const main = document.querySelector('.main');
+    Object.keys(list).forEach(key => {
+      const category = document.createElement('div');
+      category.classList.add('category');
+      main.appendChild(category);
+
+      const h2 = document.createElement('h2');
+      h2.classList.add('title');
+      h2.innerText = key;
+      category.appendChild(h2);
+
+      const collection = document.createElement('div');
+      collection.classList.add('collection');
+      category.appendChild(collection);
+
+      list[key].forEach(item => {
+        const section = document.createElement('section');
+        section.classList.add('card');
+
+        const wrap = document.createElement('div');
+        wrap.classList.add('iframe-wrapper');
+        const iframe = document.createElement('iframe');
+        iframe.classList.add('iframe');
+        iframe.src = item.link;
+        wrap.appendChild(iframe);
+        section.appendChild(wrap);
+
+        const a = document.createElement('a');
+        a.href = item.link;
+        a.target = '_blank';
+        const title = document.createElement('h3');
+        title.classList.add('title');
+        title.innerText = item.title;
+        a.appendChild(title);
+        section.appendChild(a);
+
+        collection.appendChild(section);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
