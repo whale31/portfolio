@@ -10,11 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Grape+Nuts&display=swap" rel="stylesheet">
   <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+  <link href="/Users/kubotaayano/Documents/GitHub/portfolio/assets/css/muuri.css" rel="stylesheet" type="text/css">
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="assets/js/jquery.ripples.js"></script>
   <script src="assets/js/bubble-background.js"></script>
 
+  <script src="https://unpkg.com/muuri@0.8.0/dist/muuri.min.js"></script>
 
   <script>
     $(document).ready(function () {
@@ -63,44 +66,108 @@
       });
     });
 
-    var window_h = $(window).height();
-    $("#wh span").text(window_h);
-    //スクロールイベント
-    $(window).on("scroll", function () {
-      var scroll_top = $(window).scrollTop();
-      $("#scroll span").text(scroll_top);
+    document.addEventListener('DOMContentLoaded', function () {
+      var grid = null,
+        wrapper = document.querySelector('.muuri-container'),
+        searchField = wrapper.querySelector('.search-field'),
+        filterField = wrapper.querySelector('.filter-field'),
+        sortField = wrapper.querySelector('.sort-field'),
+        gridElem = wrapper.querySelector('.grid'),
+        searchAttr = 'data-title',
+        filterAttr = 'data-color',
+        searchFieldValue,
+        filterFieldValue,
+        sortFieldValue,
+        dragOrder = [];
 
-      $(".box3-wrapper").each(function () {
-        var elem_pos = $(this).offset().top;
+      // Init the grid layout
+      grid = new Muuri(gridElem, {
+        dragEnabled: true
+      });
 
-        //どのタイミングでフェードインさせるか
-        if (scroll_top >= elem_pos - window_h + 200) {
-          $(this).addClass("fadein");
-        } else {
-          $(this).removeClass("fadein");
+      // Set inital search query, active filter, active sort value and active layout.
+      searchFieldValue = searchField.value.toLowerCase();
+      filterFieldValue = filterField.value;
+      sortFieldValue = sortField.value;
+
+      // Search field event binding
+      searchField.addEventListener('keyup', function () {
+        var newSearch = searchField.value.toLowerCase();
+        if (searchFieldValue !== newSearch) {
+          searchFieldValue = newSearch;
+          filter();
         }
       });
-    });
 
-    var window_h = $(window).height();
-    $("#wh span").text(window_h);
-    //スクロールイベント
-    $(window).on("scroll", function () {
-      var scroll_top = $(window).scrollTop();
-      $("#scroll span").text(scroll_top);
+      // Filter field event binding
+      filterField.addEventListener('change', filter);
 
-      $(".box4-wrapper").each(function () {
-        var elem_pos = $(this).offset().top;
+      // Sort field event binding
+      sortField.addEventListener('change', sort);
 
-        //どのタイミングでフェードインさせるか
-        if (scroll_top >= elem_pos - window_h + 200) {
-          $(this).addClass("fadein");
-        } else {
-          $(this).removeClass("fadein");
+      // Filtering
+      function filter() {
+        filterFieldValue = filterField.value;
+        grid.filter(function (item) {
+          var element = item.getElement(),
+            isSearchMatch = !searchFieldValue ? true : (element.getAttribute(searchAttr) || '').toLowerCase().indexOf(searchFieldValue) > -1,
+            isFilterMatch = !filterFieldValue ? true : (element.getAttribute(filterAttr) || '') === filterFieldValue;
+          return isSearchMatch && isFilterMatch;
+        });
+      }
+
+      // Sorting
+      function sort() {
+        // Do nothing if sort value did not change.
+        var currentSort = sortField.value;
+        if (sortFieldValue === currentSort) {
+          return;
         }
-      });
-    });
 
+        // If we are changing from "order" sorting to something else
+        // let's store the drag order.
+        if (sortFieldValue === 'order') {
+          dragOrder = grid.getItems();
+        }
+
+        // Sort the items.
+        grid.sort(
+          currentSort === 'title' ? compareItemTitle :
+            currentSort === 'color' ? compareItemColor :
+              dragOrder
+        );
+        sortFieldValue = currentSort;
+      }
+
+      // Compare data-title
+      function compareItemTitle(a, b) {
+        var aVal = a.getElement().getAttribute(searchAttr) || '';
+        var bVal = b.getElement().getAttribute(searchAttr) || '';
+        return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+
+      }
+
+      // Compare data-color
+      function compareItemColor(a, b) {
+        var aVal = a.getElement().getAttribute(filterAttr) || '';
+        var bVal = b.getElement().getAttribute(filterAttr) || '';
+        return aVal < bVal ? -1 : aVal > bVal ? 1 : compareItemTitle(a, b);
+      }
+
+
+      var grid = new Muuri('.grid', {
+        showDuration: 0,
+      });
+
+      var grid = new Muuri('.grid', {
+        hideDuration: 0,
+      })
+
+      var grid = new Muuri('.grid', {
+        layoutOnResize: false,
+      });
+
+    });
   </script>
 </head>
 
@@ -175,106 +242,68 @@
       </div>
     </section>
 
-    <section class="about-wrapper">
-      <div class="box2-wrapper">
-        <h2>デザインも実装もできる人間を目指して</h2>
-        <div class="border">
-          <p>
-            グラフィックやUIを設計し実際に動くようにするところまで自分でできる人間になりたいと思っています。<br>
-            デザインと実装は分業するのが主流ですがなんとか両立できる生き方を探していきたいです。<br>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-wrapper">
-      <div class="box-wrapper">
-        <h2>気持ち良いインタラクションが好き</h2>
-        <div class="border">
-          <p>
-            インタラクティブなものや動くグラフィックが好きです。<br>
-            こちらの動作に対してプロダクトが反応を返す。<br>
-            そんな「モノとの対話」ができるのがデジタルの良さだと思っています。<br>
-          </p>
-        </div>
-      </div>
-    </section>
-
     <section class="work-wrapper">
       <h2>Works</h2>
     </section>
 
+    <div class="muuri-container">
+      <div class="muuri-header filter-controls">
+        <div class="control"><p>Search</p>
+          <input class="search-field form-control" type="text" name="search" placeholder="検索">
+        </div><!-- /.control -->
 
-    <div class="box3-wrapper">
-        <h3>シナリオ・小説など文芸作品</h3>
-        <div class="border">
-          <p>
-            シナリオ、小説や即興の台本など<br>
-            言語によって表現される作品です。
-          </p>
+        <div class="control"><p>Filter</p>
+          <select class="filter-field form-control">
+            <option value="">ALL</option>
+            <option value="design">2D・3D</option>
+            <option value="interaction">interaction</option>
+            <option value="literature">文芸</option>
+          </select>
+        </div><!-- /.control -->
+
+        <div class="control"><p>Sort</p>
+          <select class="sort-field form-control">
+            <option value="order">None</option>
+            <option value="title">昇順</option>
+          </select>
+        </div><!-- /.control -->
+      </div><!-- /.muuri-header -->
+
+      <div class="grid">
+        <div class="item design" data-color="design" data-title="01">
+            <div class="item-content">
+              <div class="custom-content">
+                <p>vivivit</p>
+                <a href="https://www.vivivit.com/portfolio/public/r2aymvuMfA" class="btn btn--orange btn--radius">vivivit</a>
+              </div>
+            </div>
         </div>
 
-        <div class="btn btn1">
-          <a href="https://fori.io/whale31">Works</a>
-        </div>
-    </div>
-
-    <div class="box4-wrapper">
-      <div class="works">
-        <h3>イラスト・インフォグラフィックなど2D・3D作品</h3>
-        <div class="border">
-          <p>
-            イラスト、WEBサイトデザイン<br>
-            インフォグラフィックなど<br>
-            2D・3D作品です。
-          </p>
-        </div>
-
-        <div class="btn btn1">
-          <a href="https://www.vivivit.com/portfolio/public/r2aymvuMfA">vivivit</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="box3-wrapper">
-        <h3>ゲーム・アプリ・WEBサイトなどインタラクション作品</h3>
-        <div class="border">
-          <p>
-            ゲーム、アプリケーションWEBサイトなど<br>
-            何かアクション(操作や行動)をした時<br>
-            そのアクションが一方通行にならず<br>
-            相手側のシステムなり機器が反応するなど<br>
-            動作のある作品です。
-          </p>
-        </div>
-
-        <div class="btn btn1">
-          <a href="./works/interaction/index.html">Works</a>
-        </div>
-    </div>
-
-    <section class="about-wrapper">
-      <div class="box2-wrapper">
-        <h2>Profile</h2>
-        <div class="border">
-          <p>
-            Ayano / whale31<br>
-            デジタルハリウッド東京本校 [本科]UI/UXD専攻 2021年 4月生 卒業。<br>
-          </p>
-
-          <div class="sns-wrapper">
-            <a href="https://twitter.com/11memorandum11" class="sns">
-              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512">
-                <title>twitter</title>
-                <path
-                  d="M496,109.5a201.8,201.8,0,0,1-56.55,15.3,97.51,97.51,0,0,0,43.33-53.6,197.74,197.74,0,0,1-62.56,23.5A99.14,99.14,0,0,0,348.31,64c-54.42,0-98.46,43.4-98.46,96.9a93.21,93.21,0,0,0,2.54,22.1,280.7,280.7,0,0,1-203-101.3A95.69,95.69,0,0,0,36,130.4C36,164,53.53,193.7,80,211.1A97.5,97.5,0,0,1,35.22,199v1.2c0,47,34,86.1,79,95a100.76,100.76,0,0,1-25.94,3.4,94.38,94.38,0,0,1-18.51-1.8c12.51,38.5,48.92,66.5,92.05,67.3A199.59,199.59,0,0,1,39.5,405.6,203,203,0,0,1,16,404.2,278.68,278.68,0,0,0,166.74,448c181.36,0,280.44-147.7,280.44-275.8,0-4.2-.11-8.4-.31-12.5A198.48,198.48,0,0,0,496,109.5Z" />
-              </svg>
+          <div class="item interaction" data-color="interaction" data-title="02">
+            <a href="https://www.vivivit.com/portfolio/public/r2aymvuMfA">
+              <div class="item-content">
+                <div class="custom-content">
+                  <img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-2-3/img/21.jpg" alt="*">
+                  ああああああ
+                </div>
+              </div>
             </a>
           </div>
 
-        </div>
-      </div>
-    </section>
+          <div class="item literature" data-color="literature" data-title="03">
+            <a href="https://www.vivivit.com/portfolio/public/r2aymvuMfA">
+              <div class="item-content">
+                <div class="custom-content">
+                  <img src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/6-2-3/img/21.jpg" alt="*">
+                  ああああああ
+                </div>
+              </div>
+            </a>
+          </div>
+
+      </div><!-- /.grid -->
+
+    </div><!-- /.muuri-container -->
   </div>
 
   <footer>
